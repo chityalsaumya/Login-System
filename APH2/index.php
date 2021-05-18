@@ -38,7 +38,7 @@ session_start();
 				<input type="password" placeholder="Password" name="password" required>
             </div>
             <div class="input-group">
-				<input type="password" placeholder="CPassword" name="cpassword" required>
+				<input type="password" placeholder="Confirm Password" name="cpassword" required>
             </div>
            
 			<div class="input-group">
