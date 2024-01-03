@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Register</title>
+    <!-- Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .modal-header {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .modal-footer {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Login Button -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+        Login
+    </button>
+
+    <!-- Register Button -->
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#registerModal">
+        Register
+    </button>
+</div>
+
+<!-- Login Modal -->
+<div class="modal" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                
+                <form id="loginForm">
+                    <!-- Email input -->
+                    <div class="form-group">
+                        <label for="loginEmail">Email:</label>
+                        <input type="email" class="form-control" id="loginEmail" required>
+                    </div>
+                    <!-- Password input -->
+                    <div class="form-group">
+                        <label for="loginPassword">Password:</label>
+                        <input type="password" class="form-control" id="loginPassword" required>
+                    </div>
+                    <!-- Login button -->
+                    <button type="button" class="btn btn-primary" onclick="login()">Login</button>
+                    <!-- Link to register -->
+                    <p>Don't have an account? <a href="#" onclick="switchModal('registerModal')">Register</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Register Modal -->
+<div class="modal" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registerModalLabel">Register</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                
+                <form id="registerForm">
+                    <!-- Full Name input -->
+                    <div class="form-group">
+                        <label for="registerFullName">Full Name:</label>
+                        <input type="text" class="form-control" id="registerFullName" required>
+                    </div>
+                    <!-- Contact input -->
+                    <div class="form-group">
+                        <label for="registerContact">Contact:</label>
+                        <input type="tel" class="form-control" id="registerContact" required>
+                    </div>
+                    <!-- Date of Birth input -->
+                    <div class="form-group">
+                        <label for="registerDob">Date of Birth:</label>
+                        <input type="date" class="form-control" id="registerDob" required>
+                    </div>
+                    <!-- Email input -->
+                    <div class="form-group">
+                        <label for="registerEmail">Email:</label>
+                        <input type="email" class="form-control" id="registerEmail" required>
+                    </div>
+                    <!-- Password input -->
+                    <div class="form-group">
+                        <label for="registerPassword">Password:</label>
+                        <input type="password" class="form-control" id="registerPassword" required>
+                    </div>
+                    <!-- Gender input -->
+                    <div class="form-group">
+                        <label for="registerGender">Gender:</label>
+                        <select class="form-control" id="registerGender" required>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <!-- Register button -->
+                    <button type="button" class="btn btn-success" onclick="register()">Register</button>
+                    <!-- Link to login -->
+                    <p>Already have an account? <a href="#" onclick="switchModal('loginModal')">Login</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and Popper.js scripts -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script>
+    function login() {
+        
+        var email = document.getElementById('loginEmail').value;
+        var password = document.getElementById('loginPassword').value;
+
+       
+        if (email.trim() === '' || password.trim() === '') {
+            alert('Please enter both email and password.');
+        } else {
+           
+            alert('Login successful!');
+            
+        }
+    }
+
+    function register() {
+        
+        var fullName = document.getElementById('registerFullName').value;
+        var contact = document.getElementById('registerContact').value;
+        var dob = document.getElementById('registerDob').value;
+        var email = document.getElementById('registerEmail').value;
+        var password = document.getElementById('registerPassword').value;
+        var gender = document.getElementById('registerGender').value;
+
+        
+        if (fullName.trim() === '' || contact.trim() === '' || dob.trim() === '' || email.trim() === '' || password.trim() === '') {
+            alert('Please fill in all required fields.');
+        } else {
+            
+            var user = {
+                fullName: fullName,
+                contact: contact,
+                dob: dob,
+                email: email,
+                password: password,
+                gender: gender
+            };
+
+          
+            var existingUser = localStorage.getItem(email);
+            if (existingUser) {
+                alert('Email already registered. Please use another email.');
+            } else {
+                
+                localStorage.setItem(email, JSON.stringify(user));
+                alert('Registration successful!');
+                
+            }
+        }
+    }
+
+    function switchModal(targetModalId) {
+        $('#loginModal').modal('hide');
+        $('#registerModal').modal('hide');
+        $('#' + targetModalId).modal('show');
+    }
+</script>
+</body>
+</html>
